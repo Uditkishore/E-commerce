@@ -1,10 +1,16 @@
 import React from "react";
-import Button from "@mui/material/Button";
-import AccountMenu from "./part/menu";
+import { Stack, Link } from "@mui/material";
 export const Navbar = () => {
   return (
     <>
-      <AccountMenu />
+      <Stack
+        direction={{ xs: "column", sm: "row" }}
+        spacing={{ xs: 1, sm: 2, md: 4 }}
+      >
+        <Link>Shop</Link>
+        <Link>About</Link>
+        <Link>Location Locator</Link>
+      </Stack>
     </>
   );
 };
