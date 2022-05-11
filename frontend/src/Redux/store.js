@@ -1,4 +1,14 @@
-import { createStore } from "redux";
-import { productItemReducer } from "./reducer";
+import { combineReducers, createStore } from "redux";
+import {
+  productItemReducer,
+  selectedItemReducer,
+  cartReducer,
+} from "./reducer";
 
-export const store = createStore(productItemReducer);
+const allState = combineReducers({
+  productItemReducer,
+  selectedItemReducer,
+  cartReducer,
+});
+
+export const store = createStore(allState);

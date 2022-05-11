@@ -15,21 +15,18 @@ export const Headers = () => {
   const handleClick = (event) => {
     setAnchorEl(event.target);
   };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
   const dispatch = useDispatch();
   const handleChange = () => {
- axios
-   .get("http://localhost:8080/product")
-   .then((res) => dispatch(productItem(res.data)));
+    axios
+      .get("http://localhost:8080/product")
+      .then((res) => dispatch(productItem(res.data)));
     navigate("/");
   };
   return (
     <>
       <Navbar bg="dark" variant="dark">
         <Container>
-          <Navbar.Brand>Emart</Navbar.Brand>
+          <Navbar.Brand>Zomato</Navbar.Brand>
           <Nav className="me-auto">
             <Nav.Link onClick={handleChange}>Home</Nav.Link>
           </Nav>
@@ -38,7 +35,7 @@ export const Headers = () => {
             aria-controls={open ? "basic-menu" : undefined}
             aria-haspopup="true"
             aria-expanded={open ? "true" : undefined}
-            onClick={handleClick}
+            onClick={() => navigate("/cart")}
             badgeContent={4}
             color="primary"
           >
@@ -48,33 +45,6 @@ export const Headers = () => {
             ></i>
           </Badge>
         </Container>
-        <Menu
-          id="basic-menu"
-          anchorEl={anchorEl}
-          open={open}
-          onClose={handleClose}
-          MenuListProps={{
-            "aria-labelledby": "basic-button",
-          }}
-        >
-          <div
-            className="d-flex justify-content-around align-items-center"
-            style={{ width: "20rem", padding: "10px", position: "relative" }}
-          >
-            <i
-              className="fas fa-close smallclose"
-              onClick={handleClose}
-              style={{
-                position: "absolute",
-                top: 2,
-                right: 14,
-                cursor: "pointer",
-                fontSize: "23px",
-              }}
-            ></i>
-            <p>Your cart is empty !</p>
-          </div>
-        </Menu>
       </Navbar>
     </>
   );

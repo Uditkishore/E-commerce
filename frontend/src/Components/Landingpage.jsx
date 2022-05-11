@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Card, Button } from "react-bootstrap";
-import Cardsdata from "./data";
 import { useDispatch, useSelector } from "react-redux";
-import { productItem } from "../Redux/action";
+import { productItem, cart, selectedItem } from "../Redux/action";
+import { useNavigate } from "react-router";
 export const Homepage = () => {
   const dispatch = useDispatch();
-  const data = useSelector((e) => e);
+  const navigate = useNavigate();
+  const data = useSelector((e) => e.productItemReducer);
+  const [toggle, setToggle] = useState(true);
+  const [toggle1, setToggle1] = useState(true);
   useEffect(() => {
     getData();
   }, []);
@@ -16,26 +19,50 @@ export const Homepage = () => {
       .get("http://localhost:8080/product")
       .then((res) => dispatch(productItem(res.data)));
   };
-  let sortBy = () => {
-    let newData = data.sort((a, b) => a.rating - b.rating);
-    dispatch(productItem(newData));
+  const sortBy = () => {
+    if (toggle) {
+      let newData = data.sort((a, b) => a.rating - b.rating);
+      dispatch(productItem(newData));
+      setToggle(!toggle);
+    } else {
+      let newData = data.sort((a, b) => b.rating - a.rating);
+      dispatch(productItem(newData));
+      setToggle(!toggle);
+    }
   };
-  let filterBy = () => {
-    let newData = data.filter((e) => e.price < 100);
-    dispatch(productItem(newData));
+  const filterByPrice = () => {
+    if (toggle1) {
+      axios.get(`http://localhost:8080/product`).then((res) => {
+        let data = res.data;
+        let newData = data.filter((e) => e.price <= 100);
+        dispatch(productItem(newData));
+        setToggle1(!toggle1);
+      });
+    } else {
+      axios.get(`http://localhost:8080/product`).then((res) => {
+        let data = res.data;
+        let newData = data.filter((e) => e.price >= 100);
+        dispatch(productItem(newData));
+        setToggle1(!toggle1);
+      });
+    }
   };
 
+  
+  const sendProductItem = (data) => {
+    dispatch(selectedItem(data));
+    navigate(`/product/${data.id}`);
+  };
   return (
     <div className="container mt-3">
       <h2 className="text-center">Product page</h2>
       <div className="d-flex gap-3 justify-content-center align-items-center p-3">
         <Button onClick={sortBy} className="text-center">
-          sortByRating
+          {toggle ? "Rating-high-low" : "Rating-low-high"}
         </Button>
-        <select onChange={filterBy}>
-          <option>select...</option>
-          <option value="hundred">below 100</option>
-        </select>
+        <Button onClick={filterByPrice} className="text-center">
+          {toggle1 ? "Price below 100" : "Price above 100"}
+        </Button>
       </div>
       <div className="row d-flex justify-content-center align-items-center">
         {data.map((element, id) => {
@@ -44,6 +71,7 @@ export const Homepage = () => {
               style={{ width: "22rem", border: "none" }}
               className="mx-2 mt-4 card_style"
               key={element.id}
+              onClick={() => sendProductItem(element)}
             >
               <Card.Img
                 variant="top"
@@ -54,17 +82,8 @@ export const Homepage = () => {
               <Card.Body>
                 <Card.Title>{element.rname}</Card.Title>
                 <Card.Title>{element.rating}</Card.Title>
-                <Card.Title>{element.address}</Card.Title>
                 <Card.Text>Price : ₹ {element.price}</Card.Text>
-                <div className="button_div d-flex justify-content-center">
-                  <Button
-                    variant="primary"
-                    onClick={() => send(element)}
-                    className="col-lg-12"
-                  >
-                    Add to Cart
-                  </Button>
-                </div>
+              
               </Card.Body>
             </Card>
           );
