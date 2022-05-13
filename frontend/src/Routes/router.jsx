@@ -1,11 +1,11 @@
 import React from "react";
 import { Routes, Route, Link } from "react-router-dom";
-import { Checkout } from "../Components/Payment";
 import { Cart } from "../Components/Cartpage";
 import { Headers } from "../Components/Navbar";
 import { Homepage } from "../Components/Landingpage";
 import { Footer } from "../Components/Footer";
 import { Productpage } from "../Components/ProductDetail";
+import { Checkout } from "../Components/Checkout";
 export const Router = () => {
   return (
     <>

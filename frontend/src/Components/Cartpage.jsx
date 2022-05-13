@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Table, Button, Nav } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 export const Cart = () => {
   const data = useSelector((e) => e.cartReducer);
@@ -62,10 +63,13 @@ export const Cart = () => {
               <i className="fas fa-trash largetrash"></i>
             </td>
           </tr>
-           <br />
+          <br />
           <p className="text-center">Total :₹ </p>
         </tbody>
       </Table>
+      <Link to={"/checkout"}>
+        <Button>Checkout</Button>
+      </Link>
     </>
   );
 };

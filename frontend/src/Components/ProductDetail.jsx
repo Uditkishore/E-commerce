@@ -5,9 +5,8 @@ import { cart } from "../Redux/action";
 export const Productpage = () => {
   const data = useSelector((e) => e.selectedItemReducer);
   const dispatch = useDispatch();
-
-  const sendCartITem = (payload) => {
-    dispatch(cart(payload));
+  const sendCartITem = (cartdata) => {
+    dispatch(cart(cartdata));
   };
   return (
     <>

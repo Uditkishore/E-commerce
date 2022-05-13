@@ -17,7 +17,7 @@ export const selectedItemReducer = (state = {}, { type, payload }) => {
       return state;
   }
 };
-export const cartReducer = (state = {}, { type, payload }) => {
+export const cartReducer = (state = [], { type, payload }) => {
   switch (type) {
     case SELECTED_PRODUCT_CART:
       return { ...payload };
