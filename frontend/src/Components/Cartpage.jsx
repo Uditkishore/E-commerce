@@ -8,20 +8,24 @@ import { Link } from "react-router-dom";
 
 export const Cart = () => {
   const data = useSelector((e) => e.cart);
-
+  const [counterdata, setCounterdata] = useState(1);
+  const [data1, setData1] = useState(data);
   const dispatch = useDispatch();
 
-  const [data1, setData1] = useState(data);
 
   const Container = styled.div((props) => ({
     display: "flex",
     flexDirection: props.column && "column",
   }));
 
+
+
   let sum = 0;
   for (let i = 0; i < data.length; i++) {
     sum += data[i].price;
   }
+
+
 
   const dlt = (e) => {
     let fit = data1.filter((ele) => ele.id !== e.id);
@@ -29,6 +33,24 @@ export const Cart = () => {
     setData1(fit);
   };
 
+
+
+
+
+  const counter = (e) => {
+    const { id } = e.target;
+    if (id == "add") {
+      setCounterdata(counterdata + 1);
+      sum = sum * counterdata;
+    }
+    if (id == "subs") {
+      if (data.length <= 1) {
+        dlt(e);
+      } else {
+        setCounterdata(counterdata - 1);
+      }
+    }
+  };
   return (
     <>
       {data1.length ? (
@@ -69,11 +91,19 @@ export const Cart = () => {
                           color: "#111",
                         }}
                       >
-                        <span id="subs" style={{ fontSize: 24 }}>
+                        <span
+                          onClick={counter}
+                          id="subs"
+                          style={{ fontSize: 24 }}
+                        >
                           -
                         </span>
-                        <span style={{ fontSize: 22 }}>{e.qnty}</span>
-                        <span id="add" style={{ fontSize: 24 }}>
+                        <span style={{ fontSize: 22 }}>{counterdata}</span>
+                        <span
+                          onClick={counter}
+                          id="add"
+                          style={{ fontSize: 24 }}
+                        >
                           +
                         </span>
                       </div>

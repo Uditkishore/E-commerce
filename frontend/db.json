@@ -1,6 +1,5 @@
 {
-  "product": [
-    {
+  "product": [{
       "id": 1,
       "rname": "Massala Theoryy",
       "imgdata": "https://b.zmtcdn.com/data/pictures/9/18857339/8f53919f1175c08cf0f0371b73704f9b_o2_featured_v2.jpg?output-format=webp",
@@ -10,7 +9,7 @@
       "price": 350,
       "rating": "3.8",
       "arrimg": "https://b.zmtcdn.com/data/o2_assets/4bf016f32f05d26242cea342f30d47a31595763089.png?output-format=webp",
-      "qnty": 0
+      "qnty": 1
     },
     {
       "id": 2,
@@ -22,7 +21,7 @@
       "price": 25,
       "rating": "3.9",
       "arrimg": "https://b.zmtcdn.com/data/o2_assets/4bf016f32f05d26242cea342f30d47a31595763089.png?output-format=webp",
-      "qnty": 0
+      "qnty": 1
     },
     {
       "id": 3,
@@ -34,7 +33,7 @@
       "price": 70,
       "rating": "4.2",
       "arrimg": "https://b.zmtcdn.com/data/o2_assets/4bf016f32f05d26242cea342f30d47a31595763089.png?output-format=webp",
-      "qnty": 0
+      "qnty": 1
     },
     {
       "id": 4,
@@ -46,7 +45,7 @@
       "price": 70,
       "rating": "3.8",
       "arrimg": "https://b.zmtcdn.com/data/o2_assets/4bf016f32f05d26242cea342f30d47a31595763089.png?output-format=webp",
-      "qnty": 0
+      "qnty": 1
     },
     {
       "id": 5,
@@ -58,7 +57,7 @@
       "price": 210,
       "rating": "4.0",
       "arrimg": "https://b.zmtcdn.com/data/o2_assets/4bf016f32f05d26242cea342f30d47a31595763089.png?output-format=webp",
-      "qnty": 0
+      "qnty": 1
     },
     {
       "id": 6,
@@ -70,7 +69,7 @@
       "price": 100,
       "rating": "3.8",
       "arrimg": "https://b.zmtcdn.com/data/o2_assets/4bf016f32f05d26242cea342f30d47a31595763089.png?output-format=webp",
-      "qnty": 0
+      "qnty": 1
     },
     {
       "id": 7,
@@ -82,7 +81,7 @@
       "price": 300,
       "rating": "3.8",
       "arrimg": "https://b.zmtcdn.com/data/o2_assets/4bf016f32f05d26242cea342f30d47a31595763089.png?output-format=webp",
-      "qnty": 0
+      "qnty": 1
     },
     {
       "id": 8,
@@ -94,7 +93,7 @@
       "price": 100,
       "rating": "3.2",
       "arrimg": "https://b.zmtcdn.com/data/o2_assets/4bf016f32f05d26242cea342f30d47a31595763089.png?output-format=webp",
-      "qnty": 0
+      "qnty": 1
     },
     {
       "id": 9,
@@ -106,17 +105,15 @@
       "price": 100,
       "rating": "3.8",
       "arrimg": "https://b.zmtcdn.com/data/o2_assets/4bf016f32f05d26242cea342f30d47a31595763089.png?output-format=webp",
-      "qnty": 0
+      "qnty": 1
     }
   ],
-  "orders": [
-    {
-      "city": "Sasaram",
-      "address": "Ward No- 01, Shankar College Road",
-      "zip": "821113",
-      "email": "4353",
-      "cod": "true",
-      "id": 1
-    }
-  ]
+  "orders": [{
+    "city": "Sasaram",
+    "address": "Ward No- 01, Shankar College Road",
+    "zip": "821113",
+    "email": "4353",
+    "cod": "true",
+    "id": 1
+  }]
 }

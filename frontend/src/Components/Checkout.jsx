@@ -2,13 +2,11 @@ import React, { useState } from "react";
 import axios from "axios";
 import styled from "@emotion/styled";
 import { useSelector } from "react-redux";
-import { cart } from "../Redux/action";
+import { useNavigate } from "react-router";
 import { Container } from "react-bootstrap";
-import { AssignmentIndOutlined } from "@mui/icons-material";
 
 export const Checkout = () => {
   const [order, setOrder] = useState();
-
   const data = useSelector((e) => e.cart);
   let sum = 0;
   for (let i = 0; i < data.length; i++) {
@@ -21,12 +19,15 @@ export const Checkout = () => {
       [id]: value,
     });
   };
+  const navigate = useNavigate();
+
   const sendOrder = (e) => {
     e.preventDefault();
     axios
       .post(`https://zomatofakeshopdb.herokuapp.com/orders`, order)
       .then((res) => {
         alert("Order placed");
+        navigate("/");
       });
   };
 
@@ -102,7 +103,7 @@ export const Checkout = () => {
               type="checkbox"
               value={"true"}
             />
-            <p>Cash On Delevery</p>
+            <p>Cash On Delivery</p>
           </div>
         </div>
 
