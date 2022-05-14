@@ -1,21 +1,11 @@
-import { ITEM, SELECTED_PRODUCT, SELECTED_PRODUCT_CART } from "./constant";
+import {
+  ITEM,
+  SELECTED_PRODUCT,
+  SELECTED_PRODUCT_CART,
+  NEW_CART,
+} from "./constant";
 
-export const productItem = (data) => {
-  return {
-    type: ITEM,
-    payload: data,
-  };
-};
-
-export const selectedItem = (data) => {
-  return {
-    type: SELECTED_PRODUCT,
-    payload: data,
-  };
-};
-export const cart = (data) => {
-  return {
-    type: SELECTED_PRODUCT_CART,
-    payload: data,
-  };
-};
+export const productItem = (payload) => ({ type: ITEM, payload });
+export const selectedItem = (payload) => ({ type: SELECTED_PRODUCT, payload });
+export const cart = (payload) => ({ type: SELECTED_PRODUCT_CART, payload });
+export const newCart = (payload) => ({ type: NEW_CART, payload });

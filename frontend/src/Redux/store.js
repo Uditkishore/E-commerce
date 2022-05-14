@@ -1,14 +1,4 @@
-import { combineReducers, createStore } from "redux";
-import {
-  productItemReducer,
-  selectedItemReducer,
-  cartReducer,
-} from "./reducer";
+import { createStore } from "redux";
+import { reducer } from "./reducer";
 
-const allState = combineReducers({
-  productItemReducer,
-  selectedItemReducer,
-  cartReducer,
-});
-
-export const store = createStore(allState);
+export const store = createStore(reducer);

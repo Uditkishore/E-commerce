@@ -33,7 +33,12 @@
   flex: .5;
 }
 
-;
+.cartContainer {
+  width: 50%;
+  min-height: 70%;
+  padding: 10px;
+  box-shadow: 1px 3px 5px gray;
+}
 
 .rating {
   background-color: green;
@@ -44,6 +49,9 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+  }
+  .cartContainer {
+    width: 100%;
   }
 }
 
@@ -73,6 +81,9 @@ ul {
 
   .items_img img {
     width: 16rem;
+  }
+  .cartContainer {
+    width: 100%;
   }
 
 }

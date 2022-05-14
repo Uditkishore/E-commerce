@@ -1,26 +1,26 @@
-import { ITEM, SELECTED_PRODUCT, SELECTED_PRODUCT_CART } from "./constant";
+import {
+  ITEM,
+  SELECTED_PRODUCT,
+  SELECTED_PRODUCT_CART,
+  NEW_CART,
+} from "./constant";
 
-export const productItemReducer = (state = [], { type, payload }) => {
+const INIT_STATE = {
+  AllProducts: [],
+  selectedProduct: {},
+  cart: [],
+};
+
+export const reducer = (state = INIT_STATE, { type, payload }) => {
   switch (type) {
     case ITEM:
-      return [...payload];
-    default:
-      return state;
-  }
-};
-
-export const selectedItemReducer = (state = {}, { type, payload }) => {
-  switch (type) {
+      return { ...state, AllProducts: [...payload] };
     case SELECTED_PRODUCT:
-      return { ...payload };
-    default:
-      return state;
-  }
-};
-export const cartReducer = (state = [], { type, payload }) => {
-  switch (type) {
+      return { ...state, selectedProduct: payload };
     case SELECTED_PRODUCT_CART:
-      return { ...payload };
+      return { ...state, cart: [...state.cart, payload] };
+    case NEW_CART:
+      return { ...state, cart: [...payload] };
     default:
       return state;
   }

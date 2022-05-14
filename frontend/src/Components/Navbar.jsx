@@ -10,6 +10,8 @@ import { productItem } from "../Redux/action";
 
 export const Headers = () => {
   const navigate = useNavigate();
+  const cartLength = useSelector((e) => e.cart);
+
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -18,7 +20,7 @@ export const Headers = () => {
   const dispatch = useDispatch();
   const handleChange = () => {
     axios
-      .get("http://localhost:8080/product")
+      .get("https://zomatofakeshopdb.herokuapp.com/product")
       .then((res) => dispatch(productItem(res.data)));
     navigate("/");
   };
@@ -36,7 +38,7 @@ export const Headers = () => {
             aria-haspopup="true"
             aria-expanded={open ? "true" : undefined}
             onClick={() => navigate("/cart")}
-            badgeContent={4}
+            badgeContent={cartLength.length}
             color="primary"
           >
             <i

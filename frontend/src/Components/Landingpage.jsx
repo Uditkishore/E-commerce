@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Card, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { productItem, cart, selectedItem } from "../Redux/action";
+import { productItem, selectedItem } from "../Redux/action";
 import { useNavigate } from "react-router";
 export const Homepage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const data = useSelector((e) => e.productItemReducer);
+
+  const data = useSelector((e) => e.AllProducts);
+
   const [toggle, setToggle] = useState(true);
   const [toggle1, setToggle1] = useState(true);
   useEffect(() => {
@@ -16,7 +18,7 @@ export const Homepage = () => {
 
   const getData = () => {
     axios
-      .get("http://localhost:8080/product")
+      .get("https://zomatofakeshopdb.herokuapp.com/product")
       .then((res) => dispatch(productItem(res.data)));
   };
   const sortBy = () => {
@@ -48,7 +50,6 @@ export const Homepage = () => {
     }
   };
 
-  
   const sendProductItem = (data) => {
     dispatch(selectedItem(data));
     navigate(`/product/${data.id}`);
@@ -83,7 +84,6 @@ export const Homepage = () => {
                 <Card.Title>{element.rname}</Card.Title>
                 <Card.Title>{element.rating}</Card.Title>
                 <Card.Text>Price : ₹ {element.price}</Card.Text>
-              
               </Card.Body>
             </Card>
           );
