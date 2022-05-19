@@ -24,6 +24,8 @@
 6. Axios
 7. Bootstrap
 8. Matrial ui
+9. HTML
+10. CSS
 
 ## frontend deployed link :- https://frontend-uditkishore.vercel.app/
 ## heroku deployed link :- https://zomatofakeshopdb.herokuapp.com/
