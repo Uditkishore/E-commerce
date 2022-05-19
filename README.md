@@ -1,4 +1,4 @@
-# E-commerce
+# E-commerce Website.
 
 ## This front-end project is designed as a FOOD DELIVERY app.
 
