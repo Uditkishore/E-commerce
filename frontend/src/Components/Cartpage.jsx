@@ -9,47 +9,63 @@ import { Link } from "react-router-dom";
 export const Cart = () => {
   const data = useSelector((e) => e.cart);
   const [counterdata, setCounterdata] = useState(1);
-  const [data1, setData1] = useState(data);
+  const [sum, setSum] = useState(0);
+  const [data1, setData1] = useState([]);
   const dispatch = useDispatch();
-
 
   const Container = styled.div((props) => ({
     display: "flex",
     flexDirection: props.column && "column",
   }));
 
+  useEffect(() => {
+    filterProducts();
+  }, []);
 
-
-  let sum = 0;
-  for (let i = 0; i < data.length; i++) {
-    sum += data[i].price;
-  }
-
-
-
-  const dlt = (e) => {
-    let fit = data1.filter((ele) => ele.id !== e.id);
-    dispatch(newCart(fit));
-    setData1(fit);
+  const sumPrice = (cart) => {
+    let temp = 0;
+    for (let i = 0; i < cart.length; i++) {
+      temp += cart[i].price * cart[i].qnty;
+    }
+    setSum(temp);
   };
 
+  const dlt = (i) => {
+    let cartItems = data1;
+    cartItems.splice(i, 1);
+    dispatch(newCart(cartItems));
+    sumPrice(cartItems);
+  };
 
+  const filterProducts = () => {
+    let temp = data;
 
-
-
-  const counter = (e) => {
-    const { id } = e.target;
-    if (id == "add") {
-      setCounterdata(counterdata + 1);
-      sum = sum * counterdata;
-    }
-    if (id == "subs") {
-      if (data.length <= 1) {
-        dlt(e);
-      } else {
-        setCounterdata(counterdata - 1);
+    for (let i = 0; i < temp.length; i++) {
+      for (let j = i + 1; j < temp.length; j++) {
+        if (temp[i].id === temp[j].id) {
+          temp[i].qnty = temp[i].qnty + 1;
+          temp.splice(j, 1);
+          j--;
+        }
       }
     }
+
+    dispatch(newCart(temp));
+    sumPrice(temp);
+    setData1(temp);
+  };
+
+  const quantityUpdate = (i, nexteven) => {
+    let cartItems = data1;
+
+    cartItems[i].qnty = Number(cartItems[i].qnty) + nexteven;
+
+    if (cartItems[i].qnty == 0) {
+      cartItems.splice(i, 1);
+    }
+
+    dispatch(newCart(cartItems));
+    sumPrice(cartItems);
   };
   return (
     <>
@@ -69,7 +85,8 @@ export const Cart = () => {
               </tr>
             </thead>
             <tbody>
-              {data1.map((e) => {
+              {data1.map((e, i) => {
+                console.log(e, i);
                 return (
                   <tr key={e.id}>
                     <td>
@@ -92,15 +109,15 @@ export const Cart = () => {
                         }}
                       >
                         <span
-                          onClick={counter}
+                          onClick={() => quantityUpdate(i, -1)}
                           id="subs"
                           style={{ fontSize: 24 }}
                         >
                           -
                         </span>
-                        <span style={{ fontSize: 22 }}>{counterdata}</span>
+                        <span style={{ fontSize: 22 }}>{e.qnty}</span>
                         <span
-                          onClick={counter}
+                          onClick={() => quantityUpdate(i, 1)}
                           id="add"
                           style={{ fontSize: 24 }}
                         >
@@ -126,7 +143,7 @@ export const Cart = () => {
                       }}
                     >
                       <i
-                        onClick={() => dlt(e)}
+                        onClick={() => dlt(i)}
                         className="fas fa-trash largetrash"
                       ></i>
                     </td>

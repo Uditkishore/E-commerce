@@ -34,19 +34,23 @@ export const Homepage = () => {
   };
   const filterByPrice = () => {
     if (toggle1) {
-      axios.get(`http://localhost:8080/product`).then((res) => {
-        let data = res.data;
-        let newData = data.filter((e) => e.price <= 100);
-        dispatch(productItem(newData));
-        setToggle1(!toggle1);
-      });
+      axios
+        .get(`https://zomatofakeshopdb.herokuapp.com/product`)
+        .then((res) => {
+          let data = res.data;
+          let newData = data.filter((e) => e.price <= 100);
+          dispatch(productItem(newData));
+          setToggle1(!toggle1);
+        });
     } else {
-      axios.get(`http://localhost:8080/product`).then((res) => {
-        let data = res.data;
-        let newData = data.filter((e) => e.price >= 100);
-        dispatch(productItem(newData));
-        setToggle1(!toggle1);
-      });
+      axios
+        .get(`https://zomatofakeshopdb.herokuapp.com/product`)
+        .then((res) => {
+          let data = res.data;
+          let newData = data.filter((e) => e.price >= 100);
+          dispatch(productItem(newData));
+          setToggle1(!toggle1);
+        });
     }
   };
 
