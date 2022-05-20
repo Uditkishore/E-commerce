@@ -3,12 +3,12 @@ import React, { useState } from "react";
 export const Footer = () => {
   return (
     <>
-      <div className=" px-4 py-3 mt-3 border-top">
+      <div className=" px-4 py-5 mt-3 border-top">
         <img
           src="https://b.zmtcdn.com/web_assets/b40b97e677bc7b2ca77c58c61db266fe1603954218.png?fit=around|198:42&crop=198:42;*,*"
           alt=""
         />
-        <div className="row row-cols-1 row-cols-sm-2 row-cols-md-4 text-center mt-4">
+        <div className="row row-cols-1 row-cols-sm-2 row-cols-md-4 text-center mt-5">
           <div className="col  d-flex flex-column justify-content-center align-items-center text-start">
             <h6>ABOUT ZOMATO</h6>
             <ul>

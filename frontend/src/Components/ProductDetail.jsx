@@ -6,13 +6,13 @@ export const Productpage = () => {
   const data = useSelector((e) => e.selectedProduct);
   const cartDetails = useSelector((e) => e.cart);
   const dispatch = useDispatch();
-  const sendCartITem = (cartdata) => {    
+  const sendCartITem = (cartdata) => {
     dispatch(cart(cartdata));
     alert("Product added to the cart");
   };
   return (
     <>
-      <div className="container mt-2 ">
+      <div id="producDetailstpage" className="container mt-2 ">
         <h2 className="text-center">Iteams Details Page</h2>
         <section
           className="container"

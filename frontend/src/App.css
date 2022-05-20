@@ -7,6 +7,18 @@
   display: none;
 }
 
+.card_details {
+  height: 90vh;
+}
+
+#producDetailstpage {
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .card_style:hover {
   box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.082);
 }
@@ -50,6 +62,7 @@
     align-items: center;
     justify-content: center;
   }
+
   .cartContainer {
     width: 100%;
   }
@@ -82,6 +95,7 @@ ul {
   .items_img img {
     width: 16rem;
   }
+
   .cartContainer {
     width: 100%;
   }
