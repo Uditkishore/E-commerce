@@ -1,0 +1,22 @@
+-Product listing is done on json server. 
+-Cart isnt maintained on server but is rather maintained in redux in-memory state.
+
+ Bug in checkout page which when 1 items quantity is increased rather 
+  increases quantity of all the items.
+
+-Duplicate items also get added to cart
+-Checkout is just input boxes without checks 
+  and also just alert order placed message, 
+  no order details data is maintained.
+
+-Bugs in filter and sort
+
+-Generally speaking, Redux/Redux thunk 
+  and JSON server should work together. 
+  
+-The flow should be you making network requests ( GET/POST ) , 
+  after response from server, redux along with thunk should 
+  update application’s state accordingly
+
+-Redux with thunk is still not implemented 
+  and no chages has been done as asked in the feedback - Abdul - May 19

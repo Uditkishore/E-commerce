@@ -1,26 +1,20 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { Card, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { productItem, selectedItem } from "../Redux/action";
+import { fetchApi, selectedItem } from "../Redux/action";
 import { useNavigate } from "react-router";
 export const Homepage = () => {
+  const [toggle, setToggle] = useState(true);
+  const [toggle1, setToggle1] = useState(true);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  useEffect(() => {
+    dispatch(fetchApi());
+  }, []);
 
   const data = useSelector((e) => e.AllProducts);
 
-  const [toggle, setToggle] = useState(true);
-  const [toggle1, setToggle1] = useState(true);
-  useEffect(() => {
-    getData();
-  }, []);
+  const navigate = useNavigate();
 
-  const getData = () => {
-    axios
-      .get("https://zomatofakeshopdb.herokuapp.com/product")
-      .then((res) => dispatch(productItem(res.data)));
-  };
   const sortBy = () => {
     if (toggle) {
       let newData = data.sort((a, b) => a.rating - b.rating);

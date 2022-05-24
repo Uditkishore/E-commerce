@@ -1,75 +1,28 @@
 import React, { useEffect, useState } from "react";
-import { Table, Button, Nav } from "react-bootstrap";
+import { Table, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { cart, newCart } from "../Redux/action";
-import styled from "@emotion/styled";
-
+import axios from "axios";
 import { Link } from "react-router-dom";
 
 export const Cart = () => {
   const data = useSelector((e) => e.cart);
-  const [counterdata, setCounterdata] = useState(1);
-  const [sum, setSum] = useState(0);
-  const [data1, setData1] = useState([]);
-  const dispatch = useDispatch();
-
-  const Container = styled.div((props) => ({
-    display: "flex",
-    flexDirection: props.column && "column",
-  }));
 
   useEffect(() => {
-    filterProducts();
+    postData();
   }, []);
 
-  const sumPrice = (cart) => {
-    let temp = 0;
-    for (let i = 0; i < cart.length; i++) {
-      temp += cart[i].price * cart[i].qnty;
-    }
-    setSum(temp);
+  const postData = () => {
+    axios
+      .post(`https://zomatofakeshopdb.herokuapp.com/cartData`, data)
+      .then((res) => {
+        console.log(res);
+      });
   };
 
-  const dlt = (i) => {
-    let cartItems = data1;
-    cartItems.splice(i, 1);
-    dispatch(newCart(cartItems));
-    sumPrice(cartItems);
-  };
-
-  const filterProducts = () => {
-    let temp = data;
-
-    for (let i = 0; i < temp.length; i++) {
-      for (let j = i + 1; j < temp.length; j++) {
-        if (temp[i].id === temp[j].id) {
-          temp[i].qnty = temp[i].qnty + 1;
-          temp.splice(j, 1);
-          j--;
-        }
-      }
-    }
-
-    dispatch(newCart(temp));
-    sumPrice(temp);
-    setData1(temp);
-  };
-
-  const quantityUpdate = (i, nexteven) => {
-    let cartItems = data1;
-
-    cartItems[i].qnty = Number(cartItems[i].qnty) + nexteven;
-
-    if (cartItems[i].qnty == 0) {
-      cartItems.splice(i, 1);
-    }
-
-    dispatch(newCart(cartItems));
-    sumPrice(cartItems);
-  };
   return (
     <>
-      {data1.length ? (
+      {console.log(data)}
+      {[].length ? (
         <div className="card_details" style={{ padding: 20 }}>
           <Container className="d-flex justify-content-between">
             <p className="text-center">Total :₹ {sum}</p>
@@ -85,7 +38,7 @@ export const Cart = () => {
               </tr>
             </thead>
             <tbody>
-              {data1.map((e, i) => {
+              {[].map((e, i) => {
                 console.log(e, i);
                 return (
                   <tr key={e.id}>
