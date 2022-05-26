@@ -1,12 +1,27 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Table, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { countAction } from "../Redux/action";
-
+import { useParams } from "react-router-dom";
 export const Productpage = () => {
+  const [product, setProduct] = useState({});
   var cartArr = JSON.parse(localStorage.getItem("cartDataBase")) || [];
-  const data = useSelector((e) => e.selectedProduct);
+  const data = useSelector((e) => e.AllProducts);
   const dispatch = useDispatch();
+  const param = useParams();
+  useEffect(() => {
+    getselectedProduct();
+  });
+
+  const getselectedProduct = () => {
+    let outputData = data.filter((e) => {
+      if (e.id == param.id) {
+        setProduct(e);
+      }
+    });
+  };
+
+  console.log(param.id);
 
   const sendCartITem = (cartdata) => {
     let data = cartdata;
@@ -38,7 +53,7 @@ export const Productpage = () => {
         >
           <div className="iteamsdetails">
             <div className="items_img">
-              <img src={data.imgdata} alt="" />
+              <img src={product.imgdata} alt="" />
             </div>
             <div className="details">
               <Table>
@@ -46,13 +61,13 @@ export const Productpage = () => {
                   <tr>
                     <td>
                       <p>
-                        <strong>Restaurant</strong> : {data.rname}
+                        <strong>Restaurant</strong> : {product.rname}
                       </p>
                       <p>
-                        <strong>Price</strong> : ₹{data.price}
+                        <strong>Price</strong> : ₹{product.price}
                       </p>
                       <p>
-                        <strong>Dishes</strong> : {data.address}
+                        <strong>Dishes</strong> : {product.address}
                       </p>
                     </td>
                     <td>
@@ -66,16 +81,16 @@ export const Productpage = () => {
                             borderRadius: "5px",
                           }}
                         >
-                          {data.rating} ★
+                          {product.rating} ★
                         </span>
                       </p>
                       <p>
                         <strong>Order Review :</strong>
-                        <span>{data.somedata} </span>
+                        <span>{product.somedata} </span>
                       </p>
                       <div className="button_div d-flex justify-content-center">
                         <Button
-                          onClick={() => sendCartITem(data)}
+                          onClick={() => sendCartITem(product)}
                           variant="primary"
                           className="col-lg-12"
                         >

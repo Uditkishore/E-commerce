@@ -7,7 +7,9 @@
   display: none;
 }
 
-
+.card_details {
+  height: 90vh;
+}
 
 #producDetailstpage {
   height: 90vh;

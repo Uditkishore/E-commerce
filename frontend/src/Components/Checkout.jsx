@@ -1,33 +1,47 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { countAction } from "../Redux/action";
 import { useNavigate } from "react-router";
 import { Container } from "react-bootstrap";
+import { useDispatch } from "react-redux";
 
 export const Checkout = () => {
   const [order, setOrder] = useState();
+  const [flag, setFlag] = useState(false);
   var totalPrice = JSON.parse(localStorage.getItem("total")) || 0;
-
+  const dispatch = useDispatch();
   const inputOrders = (e) => {
     const { id, value } = e.target;
     setOrder({
       ...order,
       [id]: value,
     });
+    let len = 0;
+    for (let key in order) {
+      len++;
+    }
+    if (len == 5) {
+      setFlag(true);
+    }
   };
   const navigate = useNavigate();
 
   const sendOrder = (e) => {
+    let cartArr = [];
+    alert("Do You want to conferm your order ?");
     e.preventDefault();
     axios
       .post(`https://zomatofakeshopdb.herokuapp.com/orders`, order)
       .then((res) => {
         alert("Order placed");
+        localStorage.setItem("cartDataBase", JSON.stringify(cartArr));
+        localStorage.setItem("total", JSON.stringify(cartArr));
+        dispatch(countAction(0));
         navigate("/");
       });
   };
 
-  http: return (
+  return (
     <form className="m-auto p-5 border">
       <Container className="cartContainer">
         <div className="mb-5 bg-primary p-3 text-light">
@@ -102,13 +116,21 @@ export const Checkout = () => {
             <p>Cash On Delivery</p>
           </div>
         </div>
-
-        <input
-          type="submit"
-          onClick={sendOrder}
-          value="Place Order"
-          className="mt-5 btn btn-primary"
-        />
+        {flag ? (
+          <input
+            type="submit"
+            onClick={sendOrder}
+            value="Place Order"
+            className="mt-5 btn btn-primary"
+          />
+        ) : (
+          <input
+            type="submit"
+            disabled
+            value="Place Order"
+            className="mt-5 btn btn-primary"
+          />
+        )}
       </Container>
     </form>
   );
