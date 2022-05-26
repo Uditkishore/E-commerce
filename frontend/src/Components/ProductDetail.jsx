@@ -1,15 +1,32 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Table, Button } from "react-bootstrap";
-import { useSelector, useDispatch } from "react-redux";
-import { cart } from "../Redux/action";
+import { useDispatch, useSelector } from "react-redux";
+import { countAction } from "../Redux/action";
 export const Productpage = () => {
+  var cartArr = JSON.parse(localStorage.getItem("cartDataBase")) || [];
   const data = useSelector((e) => e.selectedProduct);
-  const cartDetails = useSelector((e) => e.cart);
   const dispatch = useDispatch();
+
   const sendCartITem = (cartdata) => {
-    dispatch(cart(cartdata));
-    alert("Product added to the cart");
+    let data = cartdata;
+    if (cartArr.length === 0) {
+      cartArr.push(data);
+      alert("Product added to the cart");
+      dispatch(countAction(cartArr.length));
+    } else {
+      let x = cartArr.filter((e) => e.id == data.id);
+      if (x.length == 0) {
+        cartArr.push(data);
+        alert("Product added to the cart");
+        dispatch(countAction(cartArr.length));
+      } else {
+        alert("Quantity got added to existing product");
+        x[0].qnty++;
+      }
+    }
+    localStorage.setItem("cartDataBase", JSON.stringify(cartArr));
   };
+
   return (
     <>
       <div id="producDetailstpage" className="container mt-2 ">

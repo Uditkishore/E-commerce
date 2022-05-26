@@ -6,8 +6,8 @@ import { useSelector } from "react-redux";
 
 export const Headers = () => {
   const navigate = useNavigate();
-  const cartLength = useSelector((e) => e.cart);
-
+  const count = useSelector((e) => e.counter);
+  var cartArr = JSON.parse(localStorage.getItem("cartDataBase")) || [];
   return (
     <>
       <Navbar bg="dark" variant="dark">
@@ -20,7 +20,7 @@ export const Headers = () => {
             id="basic-button"
             aria-haspopup="true"
             onClick={() => navigate("/cart")}
-            badgeContent={cartLength.length}
+            badgeContent={count === 0 ? cartArr.length : count}
             color="primary"
           >
             <i

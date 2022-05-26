@@ -7,12 +7,7 @@ import { Container } from "react-bootstrap";
 
 export const Checkout = () => {
   const [order, setOrder] = useState();
-  const data = useSelector((e) => e.cart);
-  console.log(data);
-  let sum = 0;
-  for (let i = 0; i < data.length; i++) {
-    sum += data[i].price;
-  }
+
   const inputOrders = (e) => {
     const { id, value } = e.target;
     setOrder({
@@ -36,7 +31,7 @@ export const Checkout = () => {
     <form className="m-auto p-5 border">
       <Container className="cartContainer">
         <div className="mb-5 bg-primary p-3 text-light">
-          Total Amount :₹ {sum}
+          Total Amount :₹ {0}
         </div>
         <div className="d-flex flex-column text-center form-row">
           <div className="form-group ">

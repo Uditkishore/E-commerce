@@ -53,7 +53,7 @@ export const Homepage = () => {
     navigate(`/product/${data.id}`);
   };
   return (
-    <div className="container mt-3">
+    <div className="container h-100 mt-3">
       <h2 className="text-center">Product page</h2>
       <div className="d-flex gap-3 justify-content-center align-items-center p-3">
         <Button onClick={sortBy} className="text-center">

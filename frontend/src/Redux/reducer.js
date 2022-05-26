@@ -1,13 +1,9 @@
-import {
-  FETCH_PRODUCTS,
-  SELECTED_PRODUCT,
-  SELECTED_PRODUCT_CART,
-} from "./constant";
+import { FETCH_PRODUCTS, SELECTED_PRODUCT, COUNTER } from "./constant";
 
 const INIT_STATE = {
   AllProducts: [],
   selectedProduct: {},
-  cart: [],
+  counter: 0,
 };
 
 export const reducer = (state = INIT_STATE, { type, payload }) => {
@@ -16,8 +12,8 @@ export const reducer = (state = INIT_STATE, { type, payload }) => {
       return { ...state, AllProducts: [...payload] };
     case SELECTED_PRODUCT:
       return { ...state, selectedProduct: payload };
-    case SELECTED_PRODUCT_CART:
-      return { ...state, cart: [...state.cart, payload] };
+    case COUNTER:
+      return { ...state, counter: payload };
     default:
       return state;
   }

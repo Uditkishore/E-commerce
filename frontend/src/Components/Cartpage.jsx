@@ -1,31 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { Table, Button } from "react-bootstrap";
+import { Table, Button, Nav, Container } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
 export const Cart = () => {
-  const data = useSelector((e) => e.cart);
-
+  const [cartData, setCartData] = useState([]);
   useEffect(() => {
-    postData();
+    setCartData(JSON.parse(localStorage.getItem("cartDataBase")) || []);
   }, []);
-
-  const postData = () => {
-    axios
-      .post(`https://zomatofakeshopdb.herokuapp.com/cartData`, data)
-      .then((res) => {
-        console.log(res);
-      });
-  };
 
   return (
     <>
-      {console.log(data)}
-      {[].length ? (
+      {cartData.length ? (
         <div className="card_details" style={{ padding: 20 }}>
           <Container className="d-flex justify-content-between">
-            <p className="text-center">Total :₹ {sum}</p>
+            <p className="text-center">Total :₹ {0}</p>
             <Link to={"/checkout"}>
               <Button>Checkout</Button>
             </Link>
@@ -38,8 +28,7 @@ export const Cart = () => {
               </tr>
             </thead>
             <tbody>
-              {[].map((e, i) => {
-                console.log(e, i);
+              {cartData.map((e, i) => {
                 return (
                   <tr key={e.id}>
                     <td>
@@ -61,19 +50,11 @@ export const Cart = () => {
                           color: "#111",
                         }}
                       >
-                        <span
-                          onClick={() => quantityUpdate(i, -1)}
-                          id="subs"
-                          style={{ fontSize: 24 }}
-                        >
+                        <span id="subs" style={{ fontSize: 24 }}>
                           -
                         </span>
                         <span style={{ fontSize: 22 }}>{e.qnty}</span>
-                        <span
-                          onClick={() => quantityUpdate(i, 1)}
-                          id="add"
-                          style={{ fontSize: 24 }}
-                        >
+                        <span id="add" style={{ fontSize: 24 }}>
                           +
                         </span>
                       </div>
@@ -95,10 +76,7 @@ export const Cart = () => {
                         cursor: "pointer",
                       }}
                     >
-                      <i
-                        onClick={() => dlt(i)}
-                        className="fas fa-trash largetrash"
-                      ></i>
+                      <i className="fas fa-trash largetrash"></i>
                     </td>
                   </tr>
                 );
