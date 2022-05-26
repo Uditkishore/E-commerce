@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import axios from "axios";
-import styled from "@emotion/styled";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { Container } from "react-bootstrap";
 
 export const Checkout = () => {
   const [order, setOrder] = useState();
-  let totalPrice = JSON.parse(localStorage.getItem("total")) || 0;
+  var totalPrice = JSON.parse(localStorage.getItem("total")) || 0;
+
   const inputOrders = (e) => {
     const { id, value } = e.target;
     setOrder({

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Card, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchApi, selectedItem } from "../Redux/action";
+import { fetchApi, selectedItem, productListItem } from "../Redux/action";
 import { useNavigate } from "react-router";
 export const Homepage = () => {
   const [toggle, setToggle] = useState(true);
@@ -18,37 +18,27 @@ export const Homepage = () => {
   const sortBy = () => {
     if (toggle) {
       let newData = data.sort((a, b) => a.rating - b.rating);
-      dispatch(productItem(newData));
+      dispatch(productListItem(newData));
       setToggle(!toggle);
     } else {
       let newData = data.sort((a, b) => b.rating - a.rating);
-      dispatch(productItem(newData));
+      dispatch(productListItem(newData));
       setToggle(!toggle);
     }
   };
   const filterByPrice = () => {
     if (toggle1) {
-      axios
-        .get(`https://zomatofakeshopdb.herokuapp.com/product`)
-        .then((res) => {
-          let data = res.data;
-          let newData = data.filter((e) => e.price <= 100);
-          dispatch(productItem(newData));
-          setToggle1(!toggle1);
-        });
+      let newData = data.sort((a, b) => a.price - b.price);
+      dispatch(productListItem(newData));
+      setToggle1(!toggle1);
     } else {
-      axios
-        .get(`https://zomatofakeshopdb.herokuapp.com/product`)
-        .then((res) => {
-          let data = res.data;
-          let newData = data.filter((e) => e.price >= 100);
-          dispatch(productItem(newData));
-          setToggle1(!toggle1);
-        });
+      let newData = data.sort((a, b) => b.price - a.price);
+      dispatch(productListItem(newData));
+      setToggle1(!toggle1);
     }
   };
 
-  const sendProductItem = (data) => {
+  const sendproductListItem = (data) => {
     dispatch(selectedItem(data));
     navigate(`/product/${data.id}`);
   };
@@ -60,7 +50,7 @@ export const Homepage = () => {
           {toggle ? "Rating-high-low" : "Rating-low-high"}
         </Button>
         <Button onClick={filterByPrice} className="text-center">
-          {toggle1 ? "Price below 100" : "Price above 100"}
+          {toggle1 ? "Price low to high" : "Price high to low"}
         </Button>
       </div>
       <div className="row d-flex justify-content-center align-items-center">
@@ -70,7 +60,7 @@ export const Homepage = () => {
               style={{ width: "22rem", border: "none" }}
               className="mx-2 mt-4 card_style"
               key={element.id}
-              onClick={() => sendProductItem(element)}
+              onClick={() => sendproductListItem(element)}
             >
               <Card.Img
                 variant="top"
