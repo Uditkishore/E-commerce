@@ -1,21 +1,67 @@
-import React, { useEffect, useState } from "react";
-import { Table, Button, Nav, Container } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
+import React, { useEffect, useState, useRef } from "react";
+import { Table, Button, Container } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import { countAction } from "../Redux/action";
 import { Link } from "react-router-dom";
 
 export const Cart = () => {
   const [cartData, setCartData] = useState([]);
+  let dispatch = useDispatch();
   useEffect(() => {
-    setCartData(JSON.parse(localStorage.getItem("cartDataBase")) || []);
+    fetchingData();
   }, []);
+
+  const fetchingData = () => {
+    return setCartData(JSON.parse(localStorage.getItem("cartDataBase")) || []);
+  };
+
+  const total = useRef(0);
+  const sum = () => {
+    let s = 0;
+    for (let i = 0; i < cartData.length; i++) {
+      s += cartData[i].price * cartData[i].qnty;
+    }
+    total.current = s;
+    localStorage.setItem("total", JSON.stringify(s));
+  };
+  sum();
+
+  const dlt = (i) => {
+    let cartItems = cartData;
+    cartItems.splice(i, 1);
+    localStorage.setItem("cartDataBase", JSON.stringify(cartItems));
+    dispatch(countAction(cartItems.length));
+    fetchingData();
+  };
+
+  const changeData = (id, val) => {
+    let temp = cartData;
+    for (let i = 0; i < temp.length; i++) {
+      if (temp[i].id == id) {
+        temp[i].qnty += val;
+        if (temp[i].qnty === 0) {
+          return dlt(i);
+        }
+      }
+    }
+
+    // let x = cartData.map((e, i) => {
+    //   if (e.id == id) {
+    //     e.qnty += val;
+    //   }
+    //   return e;
+    // });
+
+    localStorage.setItem("cartDataBase", JSON.stringify(temp));
+    fetchingData();
+  };
 
   return (
     <>
       {cartData.length ? (
         <div className="card_details" style={{ padding: 20 }}>
           <Container className="d-flex justify-content-between">
-            <p className="text-center">Total :₹ {0}</p>
+            <p className="text-center">Total :₹ {total.current}</p>
             <Link to={"/checkout"}>
               <Button>Checkout</Button>
             </Link>
@@ -50,11 +96,19 @@ export const Cart = () => {
                           color: "#111",
                         }}
                       >
-                        <span id="subs" style={{ fontSize: 24 }}>
+                        <span
+                          onClick={() => changeData(e.id, -1)}
+                          id="subs"
+                          style={{ fontSize: 24 }}
+                        >
                           -
                         </span>
                         <span style={{ fontSize: 22 }}>{e.qnty}</span>
-                        <span id="add" style={{ fontSize: 24 }}>
+                        <span
+                          onClick={() => changeData(e.id, 1)}
+                          id="add"
+                          style={{ fontSize: 24 }}
+                        >
                           +
                         </span>
                       </div>
@@ -76,7 +130,10 @@ export const Cart = () => {
                         cursor: "pointer",
                       }}
                     >
-                      <i className="fas fa-trash largetrash"></i>
+                      <i
+                        onClick={() => dlt(i)}
+                        className="fas fa-trash largetrash"
+                      ></i>
                     </td>
                   </tr>
                 );

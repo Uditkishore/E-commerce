@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Table, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { countAction } from "../Redux/action";
+
 export const Productpage = () => {
   var cartArr = JSON.parse(localStorage.getItem("cartDataBase")) || [];
   const data = useSelector((e) => e.selectedProduct);

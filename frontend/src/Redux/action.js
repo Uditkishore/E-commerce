@@ -4,7 +4,6 @@ import { FETCH_PRODUCTS, SELECTED_PRODUCT, COUNTER } from "./constant";
 
 export const fetchApi = () => async (dispatch) => {
   const response = await fakestoreapi.get("/product");
-
   dispatch({ type: FETCH_PRODUCTS, payload: response.data });
 };
 
