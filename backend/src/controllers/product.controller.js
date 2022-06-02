@@ -19,9 +19,9 @@ router.post("", authenticate, async (req, res) => {
   }
 });
 
-router.get("", crudController(Product).getAll);
+router.get("/", crudController(Product).getAll);
 
-router.patch("/:id",crudController(Product).updateOne);
+router.patch("/:id", crudController(Product).updateOne);
 
 router.delete("/:id", crudController(Product).deleteOne);
 module.exports = router;
