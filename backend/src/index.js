@@ -12,13 +12,16 @@ const app = express();
 app.use(express.json());
 
 app.post("/register", register);
+app.get("/", (req, res) => {
+  res.send({ fakeShop: "working" });
+});
 
 app.post("/login", login);
 
 app.use("/users", userController);
 app.use("/products", productController);
 
-app.listen(2345, async () => {
+app.listen(process.env.PORT || 2345, async () => {
   try {
     await connect();
   } catch (err) {
