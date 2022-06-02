@@ -1,5 +1,5 @@
 import axios from "axios";
 
 export default axios.create({
-  baseURL: "https://zomatofakeshopdb.herokuapp.com",
+  baseURL: "https://fakeshopapi.herokuapp.com",
 });
