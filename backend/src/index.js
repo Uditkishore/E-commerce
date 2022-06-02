@@ -21,7 +21,7 @@ app.post("/login", login);
 app.use("/users", userController);
 app.use("/products", productController);
 
-app.listen(process.env.PORT || 2345, async () => {
+app.listen(2345, async () => {
   try {
     await connect();
   } catch (err) {
