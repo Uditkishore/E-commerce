@@ -1,6 +1,6 @@
 # E-commerce Website.
-
-## This front-end project is designed as a FOOD DELIVERY app.
+## A complete MERN project built from scratch.
+## This project is designed as a FOOD DELIVERY app.
 
 ## Features :- 
 
