@@ -3,6 +3,14 @@
   transition: .3s;
 }
 
+#loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 90vh;
+}
+
 .smalltrash {
   display: none;
 }
@@ -21,6 +29,11 @@
 
 .card_style:hover {
   box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.082);
+}
+
+.cursor {
+  cursor: pointer;
+  text-decoration: underline;
 }
 
 .iteamsdetails {
@@ -84,10 +97,11 @@ ul {
   .smalltrash {
     display: block;
   }
-   .buttunsDiv {
-     gap: 5px;
-     flex-direction: column;
-   }
+
+  .buttunsDiv {
+    gap: 5px;
+    flex-direction: column;
+  }
 
   .largetrash {
     display: none;

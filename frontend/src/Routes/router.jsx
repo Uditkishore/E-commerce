@@ -6,12 +6,16 @@ import { Homepage } from "../Components/Landingpage";
 import { Footer } from "../Components/Footer";
 import { Productpage } from "../Components/ProductDetail";
 import { Checkout } from "../Components/Checkout";
+import Login from "../Components/Login";
+import Signup from "../Components/Signup";
 export const Router = () => {
   return (
     <>
       <Headers />
       <Routes>
         <Route path="/" element={<Homepage />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/product/:id" element={<Productpage />} />

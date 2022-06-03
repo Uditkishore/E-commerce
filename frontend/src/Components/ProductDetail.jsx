@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Table, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
+import fakestoreapi from "../../apis/fakeStoreApi";
 import { countAction } from "../Redux/action";
 import { useParams } from "react-router-dom";
+import axios from "axios";
 export const Productpage = () => {
   const [product, setProduct] = useState({});
-  var cartArr = JSON.parse(localStorage.getItem("cartDataBase")) || [];
+  const cartArr = useSelector((e) => e.cart);
   const data = useSelector((e) => e.AllProducts);
   const dispatch = useDispatch();
   const param = useParams();
@@ -19,9 +21,8 @@ export const Productpage = () => {
         setProduct(e);
       }
     });
+    return outputData;
   };
-
-  console.log(param.id);
 
   const sendCartITem = (cartdata) => {
     let data = cartdata;
@@ -40,7 +41,8 @@ export const Productpage = () => {
         x[0].qnty++;
       }
     }
-    localStorage.setItem("cartDataBase", JSON.stringify(cartArr));
+
+    console.log(fakestoreapi);
   };
 
   return (

@@ -16,6 +16,12 @@ export const Headers = () => {
           <Nav className="me-auto">
             <Nav.Link onClick={() => navigate("/")}>Home</Nav.Link>
           </Nav>
+          <Nav
+            className="btn btn-primary p-2 mx-3 pointer"
+            onClick={() => navigate("/login")}
+          >
+            Login
+          </Nav>
           <Badge
             id="basic-button"
             aria-haspopup="true"

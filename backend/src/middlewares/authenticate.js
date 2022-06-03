@@ -8,7 +8,6 @@ const verifyToken = (token) => {
 
       resolve(user);
     });
-
   });
 };
 
@@ -38,12 +37,11 @@ module.exports = async (req, res, next) => {
     });
   }
   var x = verifyToken(token);
-x.then(values =>{
-  console.log(values);
-})
+  x.then((values) => {
+    console.log(values);
+  });
   // console.log(user.user);
   req.user = user.user;
-
 
   return next();
 };
