@@ -32,6 +32,6 @@
 13. CSS
 
 ## frontend deployed link :-https://frontend-uditkishore.vercel.app/
-## heroku deployed link :- https://zomatofakeshopdb.herokuapp.com/
+## heroku deployed link :- https://fakeshopapi.herokuapp.com
 
 ## Thanks for your visit.
