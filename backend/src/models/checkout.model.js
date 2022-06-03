@@ -4,6 +4,7 @@ const checkoutSchema = new mongoose.Schema(
   {
     firstname: { type: String, required: true },
     lastname: { type: String, required: true },
+    price: { type: Number, required: true },
     address1: { type: String, required: false },
     country: { type: String, required: true },
     pin: { type: String, required: true },
