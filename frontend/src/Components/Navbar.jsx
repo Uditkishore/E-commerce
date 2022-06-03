@@ -2,12 +2,19 @@ import React, { useState } from "react";
 import Badge from "@mui/material/Badge";
 import { Nav, Navbar, Container } from "react-bootstrap";
 import { useNavigate } from "react-router";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 export const Headers = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  let user = JSON.parse(localStorage.getItem("userData"));
   const count = useSelector((e) => e.counter);
   var cartArr = JSON.parse(localStorage.getItem("cartDataBase")) || [];
+  const logoutBtn = (e) => {
+    localStorage.setItem("userData", JSON.stringify([]));
+    dispatch(countAction(0));
+    navigate("/");
+  };
   return (
     <>
       <Navbar bg="dark" variant="dark">
@@ -16,12 +23,21 @@ export const Headers = () => {
           <Nav className="me-auto">
             <Nav.Link onClick={() => navigate("/")}>Home</Nav.Link>
           </Nav>
-          <Nav
-            className="btn btn-primary p-2 mx-3 pointer"
-            onClick={() => navigate("/login")}
-          >
-            Login
-          </Nav>
+          {user && user.token ? (
+            <Nav
+              className="btn btn-primary p-2 mx-3 pointer"
+              onClick={logoutBtn}
+            >
+              logout
+            </Nav>
+          ) : (
+            <Nav
+              className="btn btn-primary p-2 mx-3 pointer"
+              onClick={() => navigate("/login")}
+            >
+              login
+            </Nav>
+          )}
           <Badge
             id="basic-button"
             aria-haspopup="true"

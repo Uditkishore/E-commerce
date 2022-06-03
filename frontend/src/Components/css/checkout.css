@@ -1,0 +1,94 @@
+.cont {
+    width: 50%;
+    margin: auto;
+    display: flex;
+    margin-top: 50px;
+    padding: 10px;
+}
+
+.div60 {
+    width: 80%;
+    margin: auto;
+    border: 2px solid teal;
+    padding: 10px;
+}
+
+@media (max-width:967px) {
+    .div60 {
+        width: 80%;
+        margin: auto;
+        border: 2px solid teal;
+        padding: 10px;
+    }
+
+    .cont {
+        width: 100%;
+        margin: auto;
+        display: flex;
+        margin-top: 50px;
+        padding: 10px;
+    }
+}
+
+@media (max-width:772px) {
+    .div60 {
+        width: 100%;
+        margin: auto;
+        border: 2px solid teal;
+        padding: 10px;
+    }
+
+    .cont {
+        width: 100%;
+        margin: auto;
+        display: flex;
+        margin-top: 50px;
+        padding: 10px;
+    }
+}
+
+.div40 {
+    width: 40%;
+    margin: auto;
+    /* border:2px solid red; */
+    padding-left: 30px;
+    margin: 0px;
+    padding-top: 0px;
+}
+
+.price_div {
+    display: flex;
+    justify-content: space-between;
+}
+
+#log_in_btn {
+    width: 80px;
+    color: white;
+    text-align: center;
+    background: blue;
+    opacity: 0.8;
+    margin-left: 20px;
+    margin-top: 35px;
+    padding: 2px 5px;
+    border-radius: 5px;
+}
+
+.grey {
+    display: flex;
+    gap: 15px;
+}
+
+.small_input {
+    height: 35px;
+    border: 1px solid grey;
+    border-radius: 5px;
+}
+
+.big_input {
+    width: 100%;
+    height: 35px;
+    margin: auto;
+    margin-top: 15px;
+    border: 1px solid grey;
+    border-radius: 5px;
+}

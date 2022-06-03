@@ -3,6 +3,7 @@ import { Table, Button, Container } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { countAction } from "../Redux/action";
 import { Link } from "react-router-dom";
+import "./css/checkout.css";
 
 export const Cart = () => {
   const [cartData, setCartData] = useState([]);
@@ -45,30 +46,9 @@ export const Cart = () => {
       }
     }
 
-    // let x = cartData.map((e, i) => {
-    //   if (e.id == id) {
-    //     e.qnty += val;
-    //   }
-    //   return e;
-    // });
-
     localStorage.setItem("cartDataBase", JSON.stringify(temp));
     fetchingData();
   };
-  // var instance = new Razorpay({
-  //   key_id: "YOUR_KEY_ID",
-  //   key_secret: "YOUR_SECRET",
-  // });
-
-  // instance.orders.create({
-  //   amount: 50000,
-  //   currency: "INR",
-  //   receipt: "receipt#1",
-  //   notes: {
-  //     key1: "value3",
-  //     key2: "value2",
-  //   },
-  // });
 
   return (
     <>

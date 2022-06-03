@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { Table, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import fakestoreapi from "../../apis/fakeStoreApi";
 import { countAction } from "../Redux/action";
 import { useParams } from "react-router-dom";
-import axios from "axios";
+import { useNavigate } from "react-router";
+
 export const Productpage = () => {
   const [product, setProduct] = useState({});
-  const cartArr = useSelector((e) => e.cart);
+  const cartArr = JSON.parse(localStorage.getItem("cartDataBase")) || [];
   const data = useSelector((e) => e.AllProducts);
+  const token = JSON.parse(localStorage.getItem("userData"));
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const param = useParams();
   useEffect(() => {
     getselectedProduct();
@@ -21,28 +23,35 @@ export const Productpage = () => {
         setProduct(e);
       }
     });
+    console.log(cartArr);
     return outputData;
   };
 
   const sendCartITem = (cartdata) => {
     let data = cartdata;
+    console.log(data);
     if (cartArr.length === 0) {
       cartArr.push(data);
+      localStorage.setItem("cartDataBase", JSON.stringify(cartArr));
       alert("Product added to the cart");
       dispatch(countAction(cartArr.length));
     } else {
       let x = cartArr.filter((e) => e.id == data.id);
       if (x.length == 0) {
         cartArr.push(data);
+        localStorage.setItem("cartDataBase", JSON.stringify(cartArr));
         alert("Product added to the cart");
         dispatch(countAction(cartArr.length));
       } else {
-        alert("Quantity got added to existing product");
         x[0].qnty++;
+        localStorage.setItem("cartDataBase", JSON.stringify(cartArr));
+        alert("Quantity got added to existing product");
       }
     }
-
-    console.log(fakestoreapi);
+  };
+  const navigateLogin = () => {
+    alert("You need to login first");
+    navigate("/login");
   };
 
   return (
@@ -91,13 +100,22 @@ export const Productpage = () => {
                         <span>{product.somedata} </span>
                       </p>
                       <div className="button_div d-flex justify-content-center">
-                        <Button
-                          onClick={() => sendCartITem(product)}
-                          variant="primary"
-                          className="col-lg-12"
-                        >
-                          Add to Cart
-                        </Button>
+                        {token.token ? (
+                          <Button
+                            onClick={() => sendCartITem(product)}
+                            variant="primary"
+                            className="col-lg-12"
+                          >
+                            Add to Cart
+                          </Button>
+                        ) : (
+                          <button
+                            className="btn btn-primary col-lg-12"
+                            onClick={navigateLogin}
+                          >
+                            Add to Cart
+                          </button>
+                        )}
                       </div>
                     </td>
                   </tr>

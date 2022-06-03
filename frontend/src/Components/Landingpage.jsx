@@ -1,18 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Card, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  fetchApi,
-  selectedItem,
-  productListItem,
-  cartAction,
-} from "../Redux/action";
+import { fetchApi, selectedItem, productListItem } from "../Redux/action";
 import { useNavigate } from "react-router";
 export const Homepage = () => {
   const [toggle, setToggle] = useState(true);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(cartAction());
     dispatch(fetchApi());
   }, []);
 
@@ -82,8 +76,8 @@ export const Homepage = () => {
           })
         ) : (
           <div id="loader">
-            <div class="spinner-border" role="status">
-              <span class="sr-only">Loading...</span>
+            <div className="spinner-border" role="status">
+              <span className="sr-only">Loading...</span>
             </div>
           </div>
         )}
