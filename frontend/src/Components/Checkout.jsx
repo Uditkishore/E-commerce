@@ -29,9 +29,9 @@ export const Checkout = () => {
       .post(`https://fakeshopapi.herokuapp.com/checkout`, order)
       .then((res) => {
         alert("Order placed");
-        // dispatch(countAction(0));
-        // localStorage.setItem("total", JSON.stringify(0));
-        // localStorage.setItem("cartDataBase", JSON.stringify([]));
+        dispatch(countAction(0));
+        localStorage.setItem("total", JSON.stringify(0));
+        localStorage.setItem("cartDataBase", JSON.stringify([]));
         navigate("/");
       });
   };

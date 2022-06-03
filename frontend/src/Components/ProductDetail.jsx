@@ -23,13 +23,11 @@ export const Productpage = () => {
         setProduct(e);
       }
     });
-    console.log(cartArr);
     return outputData;
   };
 
   const sendCartITem = (cartdata) => {
     let data = cartdata;
-    console.log(data);
     if (cartArr.length === 0) {
       cartArr.push(data);
       localStorage.setItem("cartDataBase", JSON.stringify(cartArr));
