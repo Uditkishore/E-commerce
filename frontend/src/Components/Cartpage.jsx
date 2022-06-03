@@ -93,7 +93,7 @@ export const Cart = () => {
                         <span
                           onClick={() => changeData(e.id, -1)}
                           id="subs"
-                          style={{ fontSize: 24 }}
+                          style={{ fontSize: 24, border: "1px dashed red" }}
                         >
                           -
                         </span>
@@ -101,7 +101,7 @@ export const Cart = () => {
                         <span
                           onClick={() => changeData(e.id, 1)}
                           id="add"
-                          style={{ fontSize: 24 }}
+                          style={{ fontSize: 24, border: "1px dashed red" }}
                         >
                           +
                         </span>

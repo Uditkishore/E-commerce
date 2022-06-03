@@ -3,6 +3,7 @@ import Badge from "@mui/material/Badge";
 import { Nav, Navbar, Container } from "react-bootstrap";
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
+import { countAction } from "../Redux/action";
 
 export const Headers = () => {
   const navigate = useNavigate();
@@ -38,18 +39,22 @@ export const Headers = () => {
               login
             </Nav>
           )}
-          <Badge
-            id="basic-button"
-            aria-haspopup="true"
-            onClick={() => navigate("/cart")}
-            badgeContent={count === 0 ? cartArr.length : count}
-            color="primary"
-          >
-            <i
-              className="fa-solid fa-cart-shopping text-light"
-              style={{ fontSize: 25, cursor: "pointer" }}
-            ></i>
-          </Badge>
+          {user && user.token ? (
+            <Badge
+              id="basic-button"
+              aria-haspopup="true"
+              onClick={() => navigate("/cart")}
+              badgeContent={count === 0 ? cartArr.length : count}
+              color="primary"
+            >
+              <i
+                className="fa-solid fa-cart-shopping text-light"
+                style={{ fontSize: 25, cursor: "pointer" }}
+              ></i>
+            </Badge>
+          ) : (
+            <div></div>
+          )}
         </Container>
       </Navbar>
     </>
