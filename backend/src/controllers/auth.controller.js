@@ -3,24 +3,21 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/user.model");
 
 const newToken = (user) => {
-  return jwt.sign({ user }, process.env.JWT_SECRET_KEY);
+  return jwt.sign({ user }, `${process.env.JWT_SECRET_KEY}`);
 };
 
 const register = async (req, res) => {
   try {
-
     let user = await User.findOne({ email: req.body.email }).lean().exec();
 
-
     if (user)
-      return res.status(400).send({ message: "Please try another email or password" });
+      return res
+        .status(400)
+        .send({ message: "Please try another email or password" });
 
     user = await User.create(req.body);
 
-
     const token = newToken(user);
-
-
 
     res.send({ user, token });
   } catch (err) {
@@ -30,15 +27,12 @@ const register = async (req, res) => {
 
 const login = async (req, res) => {
   try {
-
     const user = await User.findOne({ email: req.body.email });
-
 
     if (!user)
       return res
         .status(400)
         .send({ message: "Please try another email or password" });
-
 
     const match = user.comaprepass(req.body.password);
 
@@ -47,9 +41,7 @@ const login = async (req, res) => {
         .status(400)
         .send({ message: "Please try another email or password" });
 
-
     const token = newToken(user);
-
 
     res.send({ user, token });
   } catch (err) {
