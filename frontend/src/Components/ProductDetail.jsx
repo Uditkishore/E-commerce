@@ -34,7 +34,7 @@ export const Productpage = () => {
       alert("Product added to the cart");
       dispatch(countAction(cartArr.length));
     } else {
-      let x = cartArr.filter((e) => e.id == data.id); 
+      let x = cartArr.filter((e) => e.id == data.id);
       if (x.length == 0) {
         cartArr.push(data);
         localStorage.setItem("cartDataBase", JSON.stringify(cartArr));
@@ -98,7 +98,7 @@ export const Productpage = () => {
                         <span>{product.somedata} </span>
                       </p>
                       <div className="button_div d-flex justify-content-center">
-                        {token.token ? (
+                        {token && token.token ? (
                           <Button
                             onClick={() => sendCartITem(product)}
                             variant="primary"
