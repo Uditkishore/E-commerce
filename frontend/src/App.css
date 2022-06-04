@@ -15,9 +15,6 @@
   display: none;
 }
 
-.card_details {
-  height: 90vh;
-}
 
 #producDetailstpage {
   height: 90vh;
@@ -71,7 +68,6 @@
 
 .cartContainer {
   width: 50%;
-  min-height: 70%;
   padding: 10px;
   box-shadow: 1px 3px 5px gray;
 }
@@ -129,4 +125,8 @@ ul {
     width: 100%;
   }
 
+}
+
+.card_details {
+  border: 1ps solid red;
 }
