@@ -55,14 +55,11 @@ export const Productpage = () => {
   return (
     <>
       <div id="producDetailstpage" className="container mt-2 ">
-        <h2 className="text-center">Iteams Details Page</h2>
-        <section
-          className="container"
-          style={{ marginTop: "20px", marginBottom: "50px" }}
-        >
+        <h2 className="text-center mb-5">Iteams Details Page</h2>
+        <section style={{ marginTop: "20px", marginBottom: "50px" }}>
           <div className="iteamsdetails">
             <div className="items_img">
-              <img src={product.imgdata} alt="" />
+              <img src={product.imgdata} alt="Image" />
             </div>
             <div className="details">
               <Table>

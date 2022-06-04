@@ -20,7 +20,14 @@ export const Headers = () => {
     <>
       <Navbar bg="dark" variant="dark">
         <Container>
-          <Navbar.Brand>Zomato</Navbar.Brand>
+          <div class="hstack gap-3">
+            <img
+              width={"20px"}
+              src="https://www.kindpng.com/picc/m/704-7040561_app-food-detective-mission-delicious-food-icon-png.png"
+              alt=""
+            />
+            <Navbar.Brand>Zaika</Navbar.Brand>
+          </div>
           <Nav className="me-auto">
             <Nav.Link onClick={() => navigate("/")}>Home</Nav.Link>
           </Nav>
