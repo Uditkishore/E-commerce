@@ -20,7 +20,7 @@ export const Headers = () => {
     <>
       <Navbar bg="dark" variant="dark">
         <Container>
-          <div class="hstack gap-3">
+          <div className="hstack gap-3">
             <img
               width={"20px"}
               src="https://www.kindpng.com/picc/m/704-7040561_app-food-detective-mission-delicious-food-icon-png.png"
