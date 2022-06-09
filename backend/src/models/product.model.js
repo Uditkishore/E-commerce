@@ -10,6 +10,7 @@ const productSchema = new mongoose.Schema(
     price: { type: Number, required: true },
     rating: { type: String, required: true },
     qnty: { type: Number, required: true },
+    category: { type: String, required: true },
   },
   {
     versionKey: false,
