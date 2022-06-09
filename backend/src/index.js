@@ -8,7 +8,6 @@ const productController = require("./controllers/product.controller");
 const cartController = require("./controllers/cart.controller");
 const checkoutController = require("./controllers/checkout.controller");
 const { register, login } = require("./controllers/auth.controller");
-// This is my crud {register , login}
 
 const app = express();
 app.use(cors());

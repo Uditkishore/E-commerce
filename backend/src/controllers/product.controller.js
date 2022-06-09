@@ -2,8 +2,6 @@ const express = require("express");
 
 const Product = require("../models/product.model");
 
-const authenticate = require("../middlewares/authenticate");
-
 const crudController = require("./crud.controllers");
 
 const router = express.Router();
@@ -19,6 +17,8 @@ router.post("", async (req, res) => {
 });
 
 router.get("", crudController(Product).getAll);
+
+router.get("/:id", crudController(Product).getOne);
 
 router.patch("/:id", crudController(Product).updateOne);
 
