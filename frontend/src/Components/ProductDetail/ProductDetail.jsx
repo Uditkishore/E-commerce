@@ -1,52 +1,54 @@
 import React, { useEffect, useState } from "react";
 import { Table, Button } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import { countAction } from "../Redux/action";
+import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router";
+import { postCartRequest } from "../../Redux/Cart/action";
+import { fetchCartData } from "../../Redux/Cart/action";
 
 export const Productpage = () => {
   const [product, setProduct] = useState({});
-  const cartArr = JSON.parse(localStorage.getItem("cartDataBase")) || [];
-  const data = useSelector((e) => e.AllProducts);
-  const token = JSON.parse(localStorage.getItem("userData"));
+  const data = useSelector((store) => store.ecommerceData.products);
+  const user = JSON.parse(localStorage.getItem("user"));
+  const cart = useSelector((e) => e.cartData);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const param = useParams();
+
   useEffect(() => {
     getselectedProduct();
-  });
+  }, []);
 
   const getselectedProduct = () => {
-    let outputData = data.filter((e) => {
-      if (e.id == param.id) {
-        setProduct(e);
-      }
-    });
-    return outputData;
+    if (data.length) {
+      data.filter((e) => {
+        if (e.id == param.id) {
+          setProduct(e);
+        }
+      });
+    } else {
+      navigate("/");
+    }
   };
 
   const sendCartITem = (cartdata) => {
-    let data = cartdata;
-    if (cartArr.length === 0) {
-      cartArr.push(data);
-      localStorage.setItem("cartDataBase", JSON.stringify(cartArr));
-      alert("Product added to the cart");
-      dispatch(countAction(cartArr.length));
-    } else {
-      let x = cartArr.filter((e) => e.id == data.id);
-      if (x.length == 0) {
-        cartArr.push(data);
-        localStorage.setItem("cartDataBase", JSON.stringify(cartArr));
-        alert("Product added to the cart");
-        dispatch(countAction(cartArr.length));
-      } else {
-        x[0].qnty++;
-        localStorage.setItem("cartDataBase", JSON.stringify(cartArr));
-        alert("Quantity got added to existing product");
+    cartdata.userid = user.user._id;
+    let bool = false;
+    let cartData = cart.cart;
+    cartData.map((e) => {
+      if (e.id == cartdata.id) {
+        bool = true;
       }
+    });
+    if (bool) {
+      alert("item already added");
+    } else {
+      dispatch(postCartRequest(cartdata));
+      alert("item added to cart");
+      dispatch(fetchCartData());
     }
   };
+
   const navigateLogin = () => {
     alert("You need to login first");
     navigate("/login");
@@ -95,7 +97,7 @@ export const Productpage = () => {
                         <span>{product.somedata} </span>
                       </p>
                       <div className="button_div d-flex justify-content-center">
-                        {token && token.token ? (
+                        {user ? (
                           <Button
                             onClick={() => sendCartITem(product)}
                             variant="primary"

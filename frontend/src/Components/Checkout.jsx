@@ -1,15 +1,18 @@
-import React, { useState } from "react";
 import axios from "axios";
-import { countAction } from "../Redux/action";
+import React, { useState } from "react";
 import { useNavigate } from "react-router";
-import { Container } from "react-bootstrap";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchCheckoutData } from "../Redux/Checkout/action";
+import { deleteAllCartData } from "../Redux/Cart/action";
 
 export const Checkout = () => {
   const [order, setOrder] = useState({});
   const [flag, setFlag] = useState(true);
   var totalPrice = JSON.parse(localStorage.getItem("total")) || 0;
+  // const { cart } = useSelector((store) => store.cartData);
+
   const dispatch = useDispatch();
+
   const inputOrders = (e) => {
     const { id, value } = e.target;
     setOrder({
@@ -25,15 +28,10 @@ export const Checkout = () => {
 
   const sendOrder = () => {
     alert("Do You want to conferm your order ?");
-    axios
-      .post(`https://fakeshopapi.herokuapp.com/checkout`, order)
-      .then((res) => {
-        alert("Order placed");
-        dispatch(countAction(0));
-        localStorage.setItem("total", JSON.stringify(0));
-        localStorage.setItem("cartDataBase", JSON.stringify([]));
-        navigate("/");
-      });
+    dispatch(fetchCheckoutData(order));
+    dispatch(deleteAllCartData());
+    alert("Order Placed");
+    navigate("/");
   };
 
   return (

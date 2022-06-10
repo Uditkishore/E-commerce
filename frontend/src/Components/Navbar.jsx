@@ -3,19 +3,19 @@ import Badge from "@mui/material/Badge";
 import { Nav, Navbar, Container } from "react-bootstrap";
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
-import { countAction } from "../Redux/action";
+import { clearUser } from "../Redux/Auth/action";
 
 export const Headers = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  let user = JSON.parse(localStorage.getItem("userData"));
-  const count = useSelector((e) => e.counter);
+  let user = JSON.parse(localStorage.getItem("user"));
+  const cartData = useSelector((e) => e.cartData);
   var cartArr = JSON.parse(localStorage.getItem("cartDataBase")) || [];
   const logoutBtn = (e) => {
-    localStorage.setItem("userData", JSON.stringify([]));
-    dispatch(countAction(0));
+    dispatch(clearUser(""));
     navigate("/");
   };
+
   return (
     <>
       <Navbar bg="dark" variant="dark">
@@ -26,6 +26,7 @@ export const Headers = () => {
               src="https://www.kindpng.com/picc/m/704-7040561_app-food-detective-mission-delicious-food-icon-png.png"
               alt=""
             />
+            LOGO
             <Navbar.Brand>Zaika</Navbar.Brand>
           </div>
           <Nav className="me-auto">
@@ -51,7 +52,7 @@ export const Headers = () => {
               id="basic-button"
               aria-haspopup="true"
               onClick={() => navigate("/cart")}
-              badgeContent={count === 0 ? cartArr.length : count}
+              badgeContent={cartData.cart.length}
               color="primary"
             >
               <i

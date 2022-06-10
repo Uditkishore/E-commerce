@@ -1,12 +1,8 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router";
-import "./css/loginpage.css";
-import axios from "axios";
-function Login() {
+
+const LoginComp = ({ HandleLogin }) => {
   const [user, setuser] = useState({});
   const [toggle, settoggle] = useState(true);
-  const navigate = useNavigate();
-
   const handleChange = (e) => {
     const { id, value } = e.target;
     setuser({
@@ -17,20 +13,9 @@ function Login() {
       settoggle(false);
     }
   };
-
   const userData = () => {
-    axios
-      .post(`https://fakeshopapi.herokuapp.com/login`, user)
-      .then((res) => {
-        localStorage.setItem("userData", JSON.stringify(res.data));
-        alert("Login Successfull");
-        navigate("/");
-      })
-      .catch((e) => {
-        alert(e.response.data.message);
-      });
+    HandleLogin(user);
   };
-
   return (
     <div id="contain">
       <h2>Sign In or Create an Account</h2>
@@ -82,6 +67,6 @@ function Login() {
       </div>
     </div>
   );
-}
+};
 
-export default Login;
+export default LoginComp;

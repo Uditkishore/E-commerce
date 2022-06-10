@@ -21,4 +21,7 @@ router.get("", crudController(Cart).getAll);
 router.patch("/:id", crudController(Cart).updateOne);
 
 router.delete("/:id", crudController(Cart).deleteOne);
+
+router.delete("", crudController(Cart).deleteAll);
+
 module.exports = router;

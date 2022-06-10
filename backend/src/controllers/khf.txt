@@ -1,0 +1,45 @@
+let data = await model.find();
+      let sortBy = req.query || null;  
+      let filterBy = req.query || null;  
+      let products = await model.find();
+      
+    // sorting
+  
+    if(sortBy.price){
+      if(sortBy.price === 'asc'){
+        products = await model.aggregate([{ $sort : {price : 1}}])
+      }else if( sortBy.price === 'desc'){
+        products = await model.aggregate([{ $sort : {price : -1}}])
+      }
+    }else if(sortBy.rating){
+      
+      if(sortBy.rating === 'asc'){
+        products = await model.aggregate([{ $sort : {rating : 1}}])
+      }else if( sortBy.rating === 'desc'){
+        products = await model.aggregate([{ $sort : {rating : -1}}])
+      }
+
+    }else if (filterBy.category){
+          products =  products.filter(user => user.category === sortBy.category);
+    }else if(filterBy.category == 'both'){
+        products = products
+    }
+    
+
+   
+   
+   
+
+    res.status(200).json({
+      status : 'success',
+      products : products
+    });
+
+
+    
+  } catch (error) {
+    res.status(404).json({
+      status : 'error',
+      message : error.message
+    })
+  }

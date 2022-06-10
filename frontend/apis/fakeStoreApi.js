@@ -1,5 +1,5 @@
 import axios from "axios";
 
 export default axios.create({
-  baseURL: "https://fakeshopapi.herokuapp.com",
+  baseURL: "http://localhost:2345",
 });
