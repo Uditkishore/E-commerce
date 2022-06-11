@@ -2,14 +2,15 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchCheckoutData } from "../Redux/Checkout/action";
-import { deleteAllCartData } from "../Redux/Cart/action";
+import { fetchCheckoutData } from "../../Redux/Checkout/action";
 
+import "./checkout.css";
 export const Checkout = () => {
   const [order, setOrder] = useState({});
   const [flag, setFlag] = useState(true);
   var totalPrice = JSON.parse(localStorage.getItem("total")) || 0;
-  // const { cart } = useSelector((store) => store.cartData);
+
+  const user = JSON.parse(localStorage.getItem("user"));
 
   const dispatch = useDispatch();
 
@@ -27,11 +28,10 @@ export const Checkout = () => {
   const navigate = useNavigate();
 
   const sendOrder = () => {
-    alert("Do You want to conferm your order ?");
+    order.userid = user.user._id;
     dispatch(fetchCheckoutData(order));
-    dispatch(deleteAllCartData());
-    alert("Order Placed");
-    navigate("/");
+    //
+    navigate("/confirm");
   };
 
   return (

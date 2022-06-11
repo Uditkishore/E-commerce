@@ -1,14 +1,14 @@
 import React from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import { Cart } from "../Components/CartPage/Cartpage";
-import { Headers } from "../Components/Navbar";
+import { Headers } from "../Navbar/Navbar";
 import { Homepage } from "../Components/Home/Landingpage";
-import { Footer } from "../Components/Footer";
+import { Footer } from "../Components/Footer/Footer";
 import { Productpage } from "../Components/ProductDetail/ProductDetail";
-import { Checkout } from "../Components/Checkout";
-import Signup from "../Components/Signup";
+import { Checkout } from "../Components/Checkout/Checkout";
+import Signup from "../Components/Signup/Signup";
 import LoginPage from "../Components/Login/Login";
-import Confirmation from "../Components/Confermation";
+import Confirmation from "../Components/Confirmation/Confermation";
 export const Router = () => {
   return (
     <>

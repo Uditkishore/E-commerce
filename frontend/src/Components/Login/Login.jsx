@@ -1,5 +1,5 @@
 import React from "react";
-import "../css/loginpage.css";
+import "./loginpage.css";
 import LoginComp from "./LoginComp";
 import { Navigate } from "react-router-dom";
 import { useNavigate } from "react-router";

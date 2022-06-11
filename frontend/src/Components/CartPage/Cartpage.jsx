@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { fetchCartData, deleteCartData } from "../../Redux/Cart/action";
 import { Link } from "react-router-dom";
-import "../css/checkout.css";
 
 export const Cart = () => {
   const { cart, isLoading } = useSelector((store) => store.cartData);
