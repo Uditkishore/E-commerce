@@ -10,6 +10,7 @@ const checkoutSchema = new mongoose.Schema(
     pin: { type: String, required: true },
     town: { type: String, required: true },
     mobile: { type: String, required: true },
+    userid: { type: mongoose.Schema.Types.ObjectId, ref: "user" },
   },
   {
     versionKey: false,
