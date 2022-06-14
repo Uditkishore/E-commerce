@@ -8,7 +8,7 @@ const fetchCartReq = (payload) => {
     payload,
   };
 };
-const fetchCartSucces = (payload) => {
+export const fetchCartSucces = (payload) => {
   return {
     type: types.FETCH_CART_SUCCESS,
     payload,
@@ -65,8 +65,21 @@ export const fetchCartData = () => {
   };
 };
 
+// export const patchCartRequest = (payload) => (dispatch) => {
+//   dispatch(cartPostReq());
+//   console.log(payload.ids, payload.qnty);
+//   fakestoreapi
+//     .patch(`/cart/${payload.ids}`, payload.qnty)
+//     .then((res) => {
+//       dispatch(postCartSucces(res.data));
+//     })
+//     .catch((err) => {
+//       dispatch(postCartFaliure(err.message));
+//     });
+// };
 export const postCartRequest = (payload) => (dispatch) => {
   dispatch(cartPostReq());
+  console.log(payload);
   fakestoreapi
     .post(`/cart`, payload)
     .then((res) => {

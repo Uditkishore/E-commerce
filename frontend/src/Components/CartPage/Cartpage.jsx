@@ -2,19 +2,23 @@ import React, { useEffect, useState, useRef } from "react";
 import { Table, Button, Container } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 
-import { fetchCartData, deleteCartData } from "../../Redux/Cart/action";
+// fetchCartData,
+// patchCartRequest;
+import { deleteCartData, fetchCartData } from "../../Redux/Cart/action";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 export const Cart = () => {
   const { cart, isLoading } = useSelector((store) => store.cartData);
+
   let dispatch = useDispatch();
+  let total = useRef(0);
 
   const [cartData, setCartData] = useState("");
   useEffect(() => {
     dispatch(fetchCartData());
   }, [cartData]);
 
-  let total = useRef(0);
   const sum = () => {
     let s = 0;
     for (let i = 0; i < cart.length; i++) {
@@ -32,18 +36,26 @@ export const Cart = () => {
   };
 
   const changeData = (id, val) => {
-    let temp = cartData;
-    for (let i = 0; i < temp.length; i++) {
-      if (temp[i].id == id) {
-        temp[i].qnty += val;
-        if (temp[i].qnty === 0) {
-          return dlt(i);
-        }
-      }
-    }
+    let temp = cart.filter((e) => e._id == id);
+    console.log(temp[0].qnty);
 
-    localStorage.setItem("cartDataBase", JSON.stringify(temp));
-    fetchingData();
+    if (temp[0].qnty >= 1) {
+      temp[0].qnty += val;
+      let payload = { ids: id, qnty: temp[0] };
+
+      axios
+        .patch(
+          `https://fakeshopapi.herokuapp.com/cart/${payload.ids}`,
+          payload.qnty
+        )
+        .then((res) => {
+          dispatch(fetchCartData());
+        });
+    }
+    if (temp[0].qnty < 1) {
+      dlt(id);
+    }
+    setCartData(id);
   };
 
   return (
@@ -86,7 +98,7 @@ export const Cart = () => {
                       }}
                     >
                       <span
-                        // onClick={() => changeData(e.id, -1)}
+                        onClick={() => changeData(e._id, -1)}
                         id="subs"
                         style={{ fontSize: 24, border: "1px dashed red" }}
                       >
@@ -94,7 +106,7 @@ export const Cart = () => {
                       </span>
                       <span style={{ fontSize: 22 }}>{e.qnty}</span>
                       <span
-                        // onClick={() => changeData(e.id, 1)}
+                        onClick={() => changeData(e._id, 1)}
                         id="add"
                         style={{ fontSize: 24, border: "1px dashed red" }}
                       >
